@@ -1,164 +1,56 @@
-npm install -g react-native-cli
+# Welcome to your Expo app 👋
 
-# Evenup — Mobile Client
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-React Native app for tracking personal and group expenses.
+## Get started
 
----
+1. Install dependencies
 
-## Tech Stack
+   ```bash
+   npm install
+   ```
 
-| Layer | Choice |
-|-------|--------|
-| Framework | React Native (Expo) |
-| Language | TypeScript |
-| State | Zustand |
-| API Client | Axios + React Query |
-| Navigation | React Navigation v6 |
-| Storage | AsyncStorage (auth tokens) |
-| UI | NativeWind (Tailwind for RN) |
+2. Start the app
 
----
+   ```bash
+   npx expo start
+   ```
 
-## Project Structure
+In the output, you'll find options to open the app in a
 
-```
-evenup-mobile/
-├── app/
-│   ├── (auth)/
-│   │   ├── login.tsx
-│   │   └── register.tsx
-│   ├── (tabs)/
-│   │   ├── dashboard.tsx
-│   │   ├── groups/
-│   │   │   ├── index.tsx               # /groups
-│   │   │   ├── create.tsx              # /groups/create
-│   │   │   ├── [groupId]/
-│   │   │   │   ├── index.tsx           # group detail
-│   │   │   │   └── add-expense.tsx
-│   │   ├── personal/
-│   │   │   ├── index.tsx
-│   │   │   └── add-expense.tsx
-│   │   ├── balances.tsx
-│   │   └── profile.tsx
-├── components/
-│   ├── ExpenseCard.tsx
-│   ├── GroupCard.tsx
-│   ├── BalanceCard.tsx
-│   ├── ExpenseForm.tsx
-│   ├── GroupForm.tsx
-│   └── SettlementModal.tsx
-├── services/
-│   └── api.ts                          # Axios instance + endpoints
-├── stores/
-│   ├── authStore.ts
-│   ├── groupStore.ts
-│   └── expenseStore.ts
-├── hooks/
-│   ├── useGroups.ts
-│   ├── useExpenses.ts
-│   └── useBalances.ts
-└── types/
-    └── index.ts
-```
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
----
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Screens
+## Get a fresh project
 
-| Screen | Route / Stack |
-|--------|--------------|
-| Login | `(auth)/login` |
-| Register | `(auth)/register` |
-| Dashboard | `(tabs)/dashboard` |
-| Personal Expenses | `(tabs)/personal` |
-| Add Personal Expense | `personal/add-expense` |
-| Groups List | `(tabs)/groups` |
-| Create Group | `groups/create` |
-| Group Detail | `groups/[groupId]` |
-| Add Group Expense | `groups/[groupId]/add-expense` |
-| Balances | `(tabs)/balances` |
-| Profile | `(tabs)/profile` |
-
----
-
-## Core Components
-
-| Component | Purpose |
-|-----------|---------|
-| `ExpenseCard` | Renders a single expense row with amount, category, date |
-| `GroupCard` | Group summary with member count and total balance |
-| `BalanceCard` | Shows net owed/owe amount for a user |
-| `ExpenseForm` | Shared form for add/edit expense (personal + group) |
-| `GroupForm` | Create / edit group with member invite |
-| `SettlementModal` | Bottom sheet to record a payment between two users |
-
----
-
-## Auth Flow
-
-Tokens are stored in `AsyncStorage`. On app launch, `authStore` checks for a valid access token and attempts a silent refresh via `POST /auth/refresh` before routing to the dashboard or login screen.
-
-```
-App Start
-  └─ Token in AsyncStorage?
-       ├─ Yes → /auth/refresh → Dashboard
-       └─ No  → Login screen
-```
-
----
-
-## API Integration
-
-All requests go through a shared Axios instance:
-
-```ts
-// services/api.ts
-const api = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_API_URL,
-  timeout: 10000,
-});
-
-// Attach access token to every request
-api.interceptors.request.use(attachToken);
-
-// Auto-refresh on 401
-api.interceptors.response.use(null, handle401);
-```
-
-React Query is used for caching and background refetching. Mutations (add expense, settle debt) invalidate the relevant query keys.
-
----
-
-## Environment Variables
-
-```env
-EXPO_PUBLIC_API_URL=http://localhost:8000
-```
-
----
-
-## Getting Started
+When you're ready, run:
 
 ```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npx expo start
-
-# Run on iOS simulator
-npx expo run:ios
-
-# Run on Android emulator
-npx expo run:android
+npm run reset-project
 ```
 
----
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Future
+### Other setup steps
 
-- Push notifications for new expenses / settlement requests
-- Offline queue with background sync (mirrors the backend SyncEngine)
-- Split type selector (equal / exact / percentage) in ExpenseForm
-- Deep links for group invites
+- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
+- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
+- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
