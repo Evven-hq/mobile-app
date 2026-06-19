@@ -22,7 +22,7 @@ export async function register(
       email: string,
       password: string
 ) : Promise<AuthResponse> {
-      const response = await api.post("/auth/register", {email, password, name});
+      const response = await api.post("/auth/register", {name, email, password});
       return response.data
 }
 

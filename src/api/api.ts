@@ -1,5 +1,5 @@
+import { storage } from '@/utils/storage';
 import axios from 'axios'
-import * as SecureStorage from 'expo-secure-store'
 
 const BACKEND_API_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000'
 
@@ -12,7 +12,7 @@ export const api = axios.create({
 
 api.interceptors.request.use(
       async (config) => {
-            const token = await SecureStorage.getItemAsync("async_token");
+            const token = await storage.getItem("async_token");
             if(token) {
                   config.headers.Authorization = `Bearer ${token}`
             }

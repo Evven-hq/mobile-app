@@ -1,5 +1,12 @@
-import { Stack } from "expo-router";
+import { useAuthStore } from "@/store/authStore";
+import { Slot } from "expo-router";
+import { useEffect } from "react";
 
 export default function RootLayout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  const restoreSession = useAuthStore((s) => s.restoreSession);
+
+  useEffect(() => {
+    restoreSession();
+  }, [])
+  return <Slot />
 }
