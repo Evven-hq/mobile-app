@@ -30,3 +30,11 @@ export async function refreshToken(refreshToken:string) : Promise<TokenResponse>
       console.log(response.data)
       return response.data
 }
+
+export async function requestPasswordReset(email:string) : Promise<void> {
+      await api.post("/auth/forgot-password", {email});
+}
+
+export async function resetPassword(token: string, password: string) : Promise<void> {
+      await api.post("/auth/reset-password", {token, password});
+}

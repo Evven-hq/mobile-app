@@ -1,4 +1,3 @@
-// constants/colors.ts
 export const colors = {
   background: "#faf8f5", // --evven-background
   surface: "#f5f3f0", // --evven-surface
