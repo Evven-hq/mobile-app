@@ -16,20 +16,20 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if(!isInitialised) return;
+    if (!isInitialised) return;
 
-    const inAuthGroup = segments[0] === "(auth)";
-    const inAppGroup = segments[0] === "(app)";
+    const inAuthGroup = segments[0] === '(auth)';
+    const inAppGroup = segments[0] === '(app)';
 
-    if(isAuthenticated && inAuthGroup) {
-      router.replace("/(app)/dashboard");
+    if (isAuthenticated && inAuthGroup) {
+      router.replace('/(app)/dashboard');
     }
-    if(isAuthenticated && inAppGroup) {
-      router.replace("/(auth)/login");
+    if (isAuthenticated && inAppGroup) {
+      router.replace('/(auth)/login');
     }
   }, [isInitialised, isAuthenticated]);
 
-  if(!isInitialised) {
+  if (!isInitialised) {
     return (
       <View
         style={{
@@ -44,5 +44,5 @@ export default function RootLayout() {
     );
   }
 
-  return <Slot />
+  return <Slot />;
 }
