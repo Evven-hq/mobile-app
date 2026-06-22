@@ -1,27 +1,28 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "Evven",
+    "slug": "Evven",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/Img/EvenUp-white.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/Img/EvenUp-black.png"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/Img/EvenUp-black.png",
+        "backgroundImage": "./assets/Img/EvenUp-black.png",
+        "monochromeImage": "./assets/Img/EvenUp-black.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/Img/EvenUp-black.png",
+      "bundler": "metro"
     },
     "plugins": [
       "expo-router",
