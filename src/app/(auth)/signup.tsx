@@ -45,7 +45,7 @@ export default function SignUpScreen() {
     >
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.card}>
-          <Text style={styles.title}>Create an acoount</Text>
+          <Text style={styles.title}>Create an account</Text>
           <Text style={styles.subtitle}>Join us and get started today</Text>
 
           {/* Name field */}
