@@ -20,7 +20,7 @@ export default function LandingPageScreen() {
       <View style={styles.content}>
         <View style={styles.hero}>
           <Image
-            source={require('../../assets/Img/EvenUp-black.png')}
+            source={require('../../assets/Img/EvenUp-white.png')}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -54,7 +54,7 @@ export default function LandingPageScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#6f977a',
+    backgroundColor: '#102215',
   },
 
   content: {
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: 'DancingScript_700Bold',
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#1d460a',
+    color: '#b8f32f',
     lineHeight: 36,
     maxWidth: 300,
   },

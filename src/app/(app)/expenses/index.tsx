@@ -1,5 +1,5 @@
-import { Text } from "react-native";
+import { Text } from 'react-native';
 
 export default function ExpenseScreen() {
-      return <Text>Expenses</Text>
+  return <Text>Expenses</Text>;
 }

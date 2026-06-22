@@ -1,5 +1,5 @@
-import { Text } from "react-native";
+import { Text } from 'react-native';
 
 export default function GroupScreen() {
-      return <Text>Groups</Text>
+  return <Text>Groups</Text>;
 }
