@@ -4,7 +4,7 @@
     "slug": "Evven",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Img/EvenUp-white.png",
+    "icon": "./assets/Img/EvenUp-black.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "ios": {

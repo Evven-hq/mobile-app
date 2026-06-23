@@ -68,7 +68,7 @@ function getApiErrorMessage(error: unknown, fallback: string) {
 }
 
 export default function GroupDetailScreen() {
-  const { groupId } = useLocalSearchParams<{ groupId: string }>();
+  const { group_id } = useLocalSearchParams<{ group_id: string }>();
 
   const currentUser = useAuthStore((s) => s.user);
   const currentUserId = currentUser?.id;
@@ -122,22 +122,22 @@ export default function GroupDetailScreen() {
   const [settleError, setSettleError] = useState('');
 
   const load = useCallback(async () => {
-    if (!groupId) return;
+    if (!group_id) return;
     setLoading(true);
     setError(null);
     setSectionError(null);
     setBreakdownError(null);
     try {
-      const g = await getGroup(groupId);
+      const g = await getGroup(group_id);
       setGroup(g);
 
       const [membersR, expensesR, balancesR, settlementsR, breakdownR] =
         await Promise.allSettled([
-          getGroupMembers(groupId),
-          getGroupExpenses(groupId),
-          getGroupBalances(groupId),
-          getGroupSettlements(groupId),
-          getGroupDebtBreakdown(groupId),
+          getGroupMembers(group_id),
+          getGroupExpenses(group_id),
+          getGroupBalances(group_id),
+          getGroupSettlements(group_id),
+          getGroupDebtBreakdown(group_id),
         ]);
 
       if (membersR.status === 'fulfilled') setMembers(membersR.value);
@@ -187,7 +187,7 @@ export default function GroupDetailScreen() {
     } finally {
       setLoading(false);
     }
-  }, [groupId]);
+  }, [group_id]);
 
   useEffect(() => {
     const id = setTimeout(() => void load(), 0);
@@ -252,7 +252,7 @@ export default function GroupDetailScreen() {
 
   const refreshBalances = async () => {
     try {
-      setBalances(await getGroupBalances(groupId));
+      setBalances(await getGroupBalances(group_id));
     } catch {
       setSectionError('Balances could not be refreshed.');
     }
@@ -260,7 +260,7 @@ export default function GroupDetailScreen() {
   const refreshBreakdown = async () => {
     try {
       setBreakdownError(null);
-      setDebtBreakdown(await getGroupDebtBreakdown(groupId));
+      setDebtBreakdown(await getGroupDebtBreakdown(group_id));
     } catch {
       setBreakdownError('Breakdown could not be refreshed.');
     }
@@ -316,7 +316,7 @@ export default function GroupDetailScreen() {
     try {
       if (editingExpense) {
         const updated = await updateGroupExpense(
-          groupId,
+          group_id,
           editingExpense.id,
           payload,
         );
@@ -325,7 +325,7 @@ export default function GroupDetailScreen() {
         );
         if (detailExpense?.id === updated.id) await handleViewExpense(updated);
       } else {
-        const created = await createGroupExpense(groupId, payload);
+        const created = await createGroupExpense(group_id, payload);
         setExpenses((prev) => [created, ...prev]);
       }
       setShowExpenseModal(false);
@@ -344,7 +344,7 @@ export default function GroupDetailScreen() {
     setDetailError('');
     setLoadingDetails(true);
     try {
-      const details = await getGroupExpenseWithSplits(groupId, expense.id);
+      const details = await getGroupExpenseWithSplits(group_id, expense.id);
       setDetailExpense(details.expense);
       setDetailSplits(details.splits);
     } catch {
@@ -364,7 +364,7 @@ export default function GroupDetailScreen() {
     setSplitInputs({});
     setShowExpenseModal(true);
     try {
-      const details = await getGroupExpenseWithSplits(groupId, expense.id);
+      const details = await getGroupExpenseWithSplits(group_id, expense.id);
       setSelectedParticipants(details.splits.map((s) => s.user_id));
       const amount = Number(details.expense.amount);
       setSplitInputs(
@@ -386,7 +386,7 @@ export default function GroupDetailScreen() {
 
   const handleDeleteExpense = async (expId: string) => {
     try {
-      await deleteGroupExpense(groupId, expId);
+      await deleteGroupExpense(group_id, expId);
       setExpenses((prev) => prev.filter((e) => e.id !== expId));
       await Promise.all([refreshBalances(), refreshBreakdown()]);
     } catch {}
@@ -397,7 +397,7 @@ export default function GroupDetailScreen() {
     setSavingMember(true);
     setMemberError('');
     try {
-      const m = await addGroupMember(groupId, memberCode.trim());
+      const m = await addGroupMember(group_id, memberCode.trim());
       setMembers((prev) => [...prev, m]);
       setShowAddMember(false);
       setMemberCode('');
@@ -414,7 +414,7 @@ export default function GroupDetailScreen() {
     const member = memberToRemove;
     setRemovingMemberId(member.user_id);
     try {
-      await removeGroupMember(groupId, member.user_id);
+      await removeGroupMember(group_id, member.user_id);
       setMembers((prev) => prev.filter((m) => m.user_id !== member.user_id));
       setMemberToRemove(null);
       await Promise.all([refreshBalances(), refreshBreakdown()]);
@@ -432,13 +432,13 @@ export default function GroupDetailScreen() {
     setSavingSettle(true);
     setSettleError('');
     try {
-      await createSettlement(groupId, {
+      await createSettlement(group_id, {
         receiver_id: settleReceiver,
         amount: parseFloat(settleAmount),
       });
       const [set, bal] = await Promise.all([
-        getGroupSettlements(groupId),
-        getGroupBalances(groupId),
+        getGroupSettlements(group_id),
+        getGroupBalances(group_id),
       ]);
       setSettlements(set);
       setBalances(bal);

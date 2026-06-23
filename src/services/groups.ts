@@ -52,11 +52,11 @@ export async function getGroupMembers(groupId: string): Promise<GroupMember[]> {
 
 export async function addGroupMember(
   groupId: string,
-  userCode: string,
+  user_code: string,
 ): Promise<GroupMember> {
   const response = await api.post<ApiResponse<GroupMember>>(
     `/groups/${groupId}/members`,
-    { userCode },
+    { user_code },
   );
   return response.data.data;
 }
@@ -81,9 +81,10 @@ export async function createGroupExpense(
   groupId: string,
   expenseData: GroupExpenseCreate,
 ): Promise<GroupExpense> {
+  console.log(expenseData)
   const response = await api.post<ApiResponse<GroupExpense>>(
     `/groups/${groupId}/expenses`,
-    { expenseData },
+    expenseData,
   );
   return response.data.data;
 }
@@ -95,7 +96,7 @@ export async function updateGroupExpense(
 ): Promise<GroupExpense> {
   const response = await api.put<ApiResponse<GroupExpense>>(
     `/groups/${groupId}/expenses/${expenseId}`,
-    { expenseData },
+    expenseData,
   );
   return response.data.data;
 }

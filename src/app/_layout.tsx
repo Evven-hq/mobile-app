@@ -48,7 +48,7 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <Slot />;
+      <Slot />
     </SafeAreaProvider>
   );
 }
