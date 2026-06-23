@@ -12,10 +12,10 @@ export async function getPersonalExpenses(): Promise<PersonalExpense[]> {
 }
 
 export async function getPersonalExpense(
-  expenseId: string,
+  expense_id: string,
 ): Promise<PersonalExpense> {
   const response = await api.get<ApiResponse<PersonalExpense>>(
-    `/expenses/${expenseId}`,
+    `/expenses/${expense_id}`,
   );
   return response.data.data;
 }
@@ -31,16 +31,16 @@ export async function createPersonalExpense(
 }
 
 export async function updatePersonalExpense(
-  expenseId: string,
+  expense_id: string,
   expense: PersonalExpenseUpdate,
 ): Promise<PersonalExpense> {
   const response = await api.put<ApiResponse<PersonalExpense>>(
-    `/expenses/${expenseId}`,
+    `/expenses/${expense_id}`,
     expense,
   );
   return response.data.data;
 }
 
-export async function deletePersonalExpense(expenseId: string): Promise<void> {
-  await api.delete(`/expenses/${expenseId}`);
+export async function deletePersonalExpense(expense_id: string): Promise<void> {
+  await api.delete(`/expenses/${expense_id}`);
 }
