@@ -3,7 +3,7 @@
     "name": "Evven",
     "slug": "Evven",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/Img/EvenUp-black.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
